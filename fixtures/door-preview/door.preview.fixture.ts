@@ -1,13 +1,14 @@
 import { test as base } from '@playwright/test';
 import { DoorManager } from '../../api/index';
-import { HousDoorViewerPage } from '../../app';
+import { RoomDoorViewerPage } from '../../app';
 import { doors } from '../../app/data/desktop/doors.data';
-
+import { imgCall } from '../../app/data/desktop/img-api-url/img-api.data';
 // Declare the types of your fixtures.
 type MyFixtures = {
   doorManager: DoorManager,
-  housDoorViewerPage: HousDoorViewerPage,
+  roomDoorViewerPage: RoomDoorViewerPage,
   door: typeof doors
+  imgCall: typeof imgCall
 };
 
 // Extend base test by providing "signIn" 
@@ -24,13 +25,16 @@ export const doorPreviewFixture = base.extend<MyFixtures>({
    }
     await use(doorManager)
   },
-  housDoorViewerPage: async ({ page }, use) => {
-    const housDoorViewerPage = new HousDoorViewerPage(page)
+  roomDoorViewerPage: async ({ page }, use) => {
+    const housDoorViewerPage = new RoomDoorViewerPage(page)
     await use(housDoorViewerPage)
   },
   door: async ({}, use) => {
     const door = doors
     await use(door)
+  },
+  imgCall: async ({}, use) => {
+    await use(imgCall)
   },
 });
 export { expect } from '@playwright/test';

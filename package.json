@@ -2,7 +2,10 @@
   "name": "door-vision---playwright",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "tests":"npx playwright test",
+    "update-screens":"npx playwright test --update-snapshots"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

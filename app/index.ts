@@ -1,1 +1,1 @@
-export { HousDoorViewerPage } from './page/door-preview/house.door.viewer.page'
+export { RoomDoorViewerPage } from './page/door-preview/room.door.viewer.page'
