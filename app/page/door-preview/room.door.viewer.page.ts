@@ -1,19 +1,33 @@
 import { expect } from "@playwright/test";
 import { AppPage } from "../../abstractClasses";
 import { step } from "../../../misc/reporters/step";
+const path = require('path');
 
 export class RoomDoorViewerPage extends AppPage {
     public pagePath = '/';
     
     private renderedRoomImage = this.page.locator('div.refine-panel canvas.refine-overlay.hide')
     private uploadBlock = this.page.locator('div.scenario.upload')
-    private uploadPhotoInput = this.page.locator('div.scenario.upload')
+    private uploadPhotoInput = this.page.locator('input#upload-file')
+    private saveNewDoorPositionButton = this.page.locator('button.btn-refine-save')
     private visualizeFooter = this.page.locator('div.visualize-footer')
     private roomImage (roomNumber: number) { return this.page.locator(`(//div[@class="scenario"])[${roomNumber}]`) }
+    public favouriteToggleText = this.page.locator('span.toggle-text-off')
 
-    private doors = this.page.locator('div.door')
-    private door (doorName: string) { return this.page.locator(`//p[text()="${doorName}"]/ancestor::div[@class="door"]`) }
+    private goToShopButton = this.page.locator('button[title="Find Out More"]')
+    private shareLinkButton = this.page.locator('button[title="Share Link"]')
+    private saveImgButton = this.page.locator('button[title="Save Image"]')
+    private flipDoorButton = this.page.locator('button[title="Flip Door"]')
+    private markFavouriteButton = this.page.locator('button[title="Mark Favourite"]')
 
+
+    public doors = this.page.locator('div.door')
+    public door (doorName: string) { return this.page.locator(`//p[text()="${doorName}"]/ancestor::div[@class="door"]`) }
+    public activeDoor (doorName: string) { return this.page.locator(`//p[text()="${doorName}"]/ancestor::div[@class="door active"]`) }
+    public doorFavouriteMark (doorName: string) { return this.page.locator(`//p[text()="${doorName}"]/ancestor::div[@class="door"]//div[@class="fav-container"]`) }
+    public activeDoorFavouriteMark (doorName: string) { return this.page.locator(`//p[text()="${doorName}"]/ancestor::div[@class="door active"]//div[@class="fav-container"]`) }
+    public doorMarkedAsFavourite (doorName: string) { return this.page.locator(`//p[text()="${doorName}"]/ancestor::div[@class="door"]//i[@class="m-icon heart-solid"]`) }
+    public activeDoorMarkedAsFavourite (doorName: string) { return this.page.locator(`//p[text()="${doorName}"]/ancestor::div[@class="door active"]//i[@class="m-icon heart-solid"]`) }
     @step()
     async takeDoorViewerScreenshot(name:string) {
         await this.page.waitForLoadState('load')
@@ -38,6 +52,47 @@ export class RoomDoorViewerPage extends AppPage {
     async waitApiCall(name:string){
         await this.page.waitForRequest(request => request.url() === name);
     }
-    
-  
+    @step()
+    async uploadNewphoto(folder:string,imgName:string){
+        await this.uploadPhotoInput.setInputFiles(path.join(folder,imgName));
+    }
+    @step() 
+    async clickSaveNewDoorPositionButton(){
+        //await expect(this.saveNewDoorPositionButton).toBeVisible()
+        await this.saveNewDoorPositionButton.click()
+    }
+    @step()
+    async clickGoToShopButton(){
+        await this.goToShopButton.click()
+    }
+    @step()
+    async clickShareLinkButton(){
+        await this.shareLinkButton.click()
+    }
+    @step()
+    async clickSaveImgButton(){
+        await this.saveImgButton.click()
+    }
+    @step()
+    async clickFlipDoorButton(){
+        await this.flipDoorButton.click()
+    }
+    @step()
+    async clickMarkFavouriteButton(){
+        await this.markFavouriteButton.click()
+    }
+    @step()
+    async clickFavouriteToggleText(){
+        await this.favouriteToggleText.click()
+    }
+    @step()
+    async clickDoorFavouriteMark(doorName:string){
+        await this.door(doorName).hover()
+        await this.doorFavouriteMark(doorName).click()
+    }
+    @step()
+    async clickActiveDoorFavouriteMark(doorName:string){
+        await this.activeDoor(doorName).hover()
+        await this.activeDoorFavouriteMark(doorName).click()
+    }
 }

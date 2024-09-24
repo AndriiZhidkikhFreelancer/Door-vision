@@ -1,4 +1,5 @@
 import type { Page } from '@playwright/test';
+import { expect } from "@playwright/test";
 import { step } from '../misc/reporters/step';
 
 export abstract class PageHolder { 
@@ -22,5 +23,9 @@ export abstract class AppPage extends Component {
     async open(path?: string) {
         await this.page.goto(path ?? this.pagePath);
         await this.page.waitForLoadState('load')
+    }
+    @step()
+    async toHaveUrl(url:string) {
+        expect(this.page.url).toBe(url)  
     }
 }
