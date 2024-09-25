@@ -1,0 +1,65 @@
+name: Playwright Tests
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+permissions:
+  contents: write  # Ensure the token has write permissions
+  pages: write
+  id-token: write
+
+run-name: ${{ github.actor }} run playwright tests 🚀🚀🚀
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  test:
+    timeout-minutes: 60
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 20
+    - name: Install dependencies
+      run: npm ci
+    - name: Install Playwright Browsers
+      run: npx playwright install --with-deps
+    - name: Run Playwright tests
+      run: npx playwright test
+    - uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: playwright-report
+        path: playwright-report/
+        retention-days: 30
+
+  deploy:
+    if: always()
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4  # Checkout the repository
+      with:
+        fetch-depth: 0  # Ensure the full repo is checked out
+    - name: Download Playwright report artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: playwright-report
+        path: ./playwright-report/
+    - name: Deploy to GitHub Pages
+      env:
+        GITHUB_TOKEN: ${{ secrets.PAT }}  # Use the default GitHub token
+      run: |
+        git config --global user.name "${{ github.actor }}"
+        git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+        git checkout -B gh-pages  # Create or switch to gh-pages branch
+        mkdir -p ./playwright-report
+        cp -r ./playwright-report/* .
+        git add .
+        git commit -m "Deploy Playwright report to GitHub Pages"
+        git push https://x-access-token:${{ secrets.PAT }}@github.com/${{ github.repository }} gh-pages --force  # Push to gh-pages
