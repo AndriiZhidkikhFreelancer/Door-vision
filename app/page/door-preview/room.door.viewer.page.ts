@@ -35,7 +35,7 @@ export class RoomDoorViewerPage extends AppPage {
         await this.page.waitForTimeout(2000)
         await expect(this.renderedRoomImage).toHaveScreenshot(name, {
           maxDiffPixels: 0.2,
-          mask: [this.uploadBlock,this.roomImage(1),this.roomImage(2),this.roomImage(3),this.roomImage(4),this.visualizeFooter,this.doorsContainer],
+          mask: [this.uploadBlock,this.roomImage(1),this.roomImage(2),this.roomImage(3),this.roomImage(4),this.roomImage(5),this.roomImage(6),this.visualizeFooter,this.doorsContainer],
         });
     }
 

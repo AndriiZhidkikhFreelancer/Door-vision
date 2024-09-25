@@ -1,24 +1,25 @@
 import { doorPreviewFixture, expect } from '../fixtures/door-preview/door.preview.fixture';
 import { ProductDetailPage } from './../app/index';
-   doorPreviewFixture.describe('', () => {
-      doorPreviewFixture(`ID-1: Check base image`, async ({ roomDoorViewerPage, imgCall }) => {
+   for(let i = 0; i<10; i++){
+   doorPreviewFixture.describe('tests', () => {
+      doorPreviewFixture(`ID-1- ${i} : Check base image`, async ({ roomDoorViewerPage, imgCall }) => {
          await roomDoorViewerPage.open()
         
          await roomDoorViewerPage.takeDoorViewerScreenshot('firstRoomWithOakDoor.png')
       });
-      doorPreviewFixture(`ID-2 : Change doors`, async ({ roomDoorViewerPage, door, imgCall }) => {
+      doorPreviewFixture(`ID-2- ${i} : Change doors`, async ({ roomDoorViewerPage, door, imgCall }) => {
          await roomDoorViewerPage.open()
          await roomDoorViewerPage.clickDoor(door.creme)
          await roomDoorViewerPage.takeDoorViewerScreenshot('firstRoomWithCremeDoor.png')
          await roomDoorViewerPage.clickDoor(door.anthrazite)
          await roomDoorViewerPage.takeDoorViewerScreenshot('firstRoomWithAnthraziteDoor.png')
       });
-      doorPreviewFixture(`ID-3 : Check fourth base image`, async ({ roomDoorViewerPage, imgCall }) => {
+      doorPreviewFixture(`ID-3- ${i} : Check fourth base image`, async ({ roomDoorViewerPage, imgCall }) => {
          await roomDoorViewerPage.open()
          await roomDoorViewerPage.clickRoomImage(4)
          await roomDoorViewerPage.takeDoorViewerScreenshot('fourthRoomWithOakDoor.png')
       });
-      doorPreviewFixture(`ID-4 : Change doors on the fourth image`, async ({ roomDoorViewerPage, door, imgCall }) => {
+      doorPreviewFixture(`ID-4- ${i} : Change doors on the fourth image`, async ({ roomDoorViewerPage, door, imgCall }) => {
          await roomDoorViewerPage.open()
          await roomDoorViewerPage.clickRoomImage(4)
          await roomDoorViewerPage.clickDoor(door.anthrazite)
@@ -26,13 +27,13 @@ import { ProductDetailPage } from './../app/index';
          await roomDoorViewerPage.clickDoor(door.beech)
          await roomDoorViewerPage.takeDoorViewerScreenshot('fourthRoomWithBeechDoor.png')
       });
-      doorPreviewFixture(`ID-5 : Upload new image`, async ({ roomDoorViewerPage, imgCall }) => {
+      doorPreviewFixture(`ID-5- ${i} : Upload new image`, async ({ roomDoorViewerPage, imgCall }) => {
          await roomDoorViewerPage.open()
          await roomDoorViewerPage.uploadNewphoto('docs/img', 'newDoor.jpg')
          await roomDoorViewerPage.clickSaveNewDoorPositionButton()
          await roomDoorViewerPage.takeDoorViewerScreenshot('newRoomWithOakDoor.png')
       });
-      doorPreviewFixture(`ID-6 : Change doors on the new images`, async ({ roomDoorViewerPage, door, page, imgCall }) => {
+      doorPreviewFixture(`ID-6- ${i} : Change doors on the new images`, async ({ roomDoorViewerPage, door, page, imgCall }) => {
          await roomDoorViewerPage.open()
          await roomDoorViewerPage.uploadNewphoto('docs/img', 'newDoor.jpg')
          await roomDoorViewerPage.clickSaveNewDoorPositionButton()
@@ -42,7 +43,7 @@ import { ProductDetailPage } from './../app/index';
          await roomDoorViewerPage.clickDoor(door.creme)
          await roomDoorViewerPage.takeDoorViewerScreenshot('newRoomWithCremeDoor.png')
       });
-      doorPreviewFixture(`ID-7 : Add door to the favourite using footer menu`, async ({ roomDoorViewerPage, door, imgCall }) => {
+      doorPreviewFixture(`ID-7- ${i} : Add door to the favourite using footer menu`, async ({ roomDoorViewerPage, door, imgCall }) => {
          await roomDoorViewerPage.open()
          await roomDoorViewerPage.uploadNewphoto('docs/img', 'newDoor.jpg')
          await roomDoorViewerPage.clickSaveNewDoorPositionButton()
@@ -54,7 +55,7 @@ import { ProductDetailPage } from './../app/index';
          await expect(roomDoorViewerPage.activeDoor(door.anthrazite)).toBeVisible()
          await expect(roomDoorViewerPage.doors).toHaveCount(1)
       });
-      doorPreviewFixture(`ID-8 : Add two doors to the favourite using doors list`, async ({ roomDoorViewerPage, door, imgCall }) => {
+      doorPreviewFixture(`ID-8- ${i} : Add two doors to the favourite using doors list`, async ({ roomDoorViewerPage, door, imgCall }) => {
          await roomDoorViewerPage.open()
          await roomDoorViewerPage.clickActiveDoorFavouriteMark(door.oak)
          await expect(roomDoorViewerPage.activeDoorMarkedAsFavourite(door.oak)).toBeVisible()
@@ -69,7 +70,7 @@ import { ProductDetailPage } from './../app/index';
          await expect(roomDoorViewerPage.door(door.creme)).toBeVisible()
          await expect(roomDoorViewerPage.doors).toHaveCount(3)
       });
-      doorPreviewFixture(`ID-13: Click go to shop button`, async ({ roomDoorViewerPage, imgCall, context }) => {
+      doorPreviewFixture(`ID-13- ${i}: Click go to shop button`, async ({ roomDoorViewerPage, imgCall, context }) => {
          await roomDoorViewerPage.open()
          await roomDoorViewerPage.uploadNewphoto('docs/img', 'newDoor.jpg')
          await roomDoorViewerPage.clickSaveNewDoorPositionButton()
@@ -85,3 +86,4 @@ import { ProductDetailPage } from './../app/index';
          expect(newPage).toHaveURL('https://www.door-vision.com/productdetail')
       });
    })
+}
