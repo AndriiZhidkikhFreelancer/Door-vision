@@ -14,13 +14,13 @@ export class RoomDoorViewerPage extends AppPage {
     private roomImage (roomNumber: number) { return this.page.locator(`(//div[@class="scenario"])[${roomNumber}]`) }
     public favouriteToggleText = this.page.locator('span.toggle-text-off')
 
-    private goToShopButton = this.page.locator('button[title="Find Out More"]')
+    public goToShopButton = this.page.locator('button[title="Find Out More"]')
     private shareLinkButton = this.page.locator('button[title="Share Link"]')
     private saveImgButton = this.page.locator('button[title="Save Image"]')
     private flipDoorButton = this.page.locator('button[title="Flip Door"]')
     private markFavouriteButton = this.page.locator('button[title="Mark Favourite"]')
 
-
+    private doorsContainer = this.page.locator('div.door-list-container')
     public doors = this.page.locator('div.door')
     public door (doorName: string) { return this.page.locator(`//p[text()="${doorName}"]/ancestor::div[@class="door"]`) }
     public activeDoor (doorName: string) { return this.page.locator(`//p[text()="${doorName}"]/ancestor::div[@class="door active"]`) }
@@ -35,7 +35,7 @@ export class RoomDoorViewerPage extends AppPage {
         await this.page.waitForTimeout(2000)
         await expect(this.renderedRoomImage).toHaveScreenshot(name, {
           maxDiffPixels: 0.2,
-          mask: [this.uploadBlock,this.roomImage(1),this.roomImage(2),this.roomImage(3),this.roomImage(4),this.roomImage(5),this.roomImage(6),this.visualizeFooter,this.doors],
+          mask: [this.uploadBlock,this.roomImage(1),this.roomImage(2),this.roomImage(3),this.roomImage(4),this.visualizeFooter,this.doorsContainer],
         });
     }
 
@@ -63,6 +63,7 @@ export class RoomDoorViewerPage extends AppPage {
         await expect(this.spinnerLoader).toHaveCount(0,{ timeout: 10000 })
         await expect(this.saveNewDoorPositionButton).toHaveText('Save',{ timeout: 10000 })
         await expect(this.saveNewDoorPositionButton).toBeVisible({ timeout: 10000 })
+        await this.page.waitForTimeout(500)
         await this.saveNewDoorPositionButton.click()
     }
     @step()
