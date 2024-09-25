@@ -70,8 +70,10 @@ import { ProductDetailPage } from './../app/index';
          await expect(roomDoorViewerPage.door(door.creme)).toBeVisible()
          await expect(roomDoorViewerPage.doors).toHaveCount(3)
       });
-      doorPreviewFixture(`ID-13- ${i}: Click go to shop button`, async ({ roomDoorViewerPage, imgCall, context }) => {
+      doorPreviewFixture.only(`ID-13- ${i}: Click go to shop button`, async ({ roomDoorViewerPage, browser, context }) => {
          await roomDoorViewerPage.open()
+         const version =  browser.version();
+         console.log(`Версия браузера: ${version}`);
          await roomDoorViewerPage.uploadNewphoto('docs/img', 'newDoor.jpg')
          await roomDoorViewerPage.clickSaveNewDoorPositionButton()
          await expect(roomDoorViewerPage.goToShopButton).toBeVisible()
