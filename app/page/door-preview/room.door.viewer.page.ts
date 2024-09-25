@@ -7,7 +7,7 @@ export class RoomDoorViewerPage extends AppPage {
     public pagePath = '/';
     private spinnerLoader= this.page.locator('div.spinner-border')
     private renderedRoomImage = this.page.locator('div.refine-panel canvas.refine-overlay.hide')
-    private uploadBlock = this.page.locator('div.scenario.upload')
+    private header = this.page.locator('div.row.header-row')
     private uploadPhotoInput = this.page.locator('input#upload-file')
     private saveNewDoorPositionButton = this.page.locator('button.btn-refine-save')
     private visualizeFooter = this.page.locator('div.visualize-footer')
@@ -35,7 +35,7 @@ export class RoomDoorViewerPage extends AppPage {
         await this.page.waitForTimeout(2000)
         await expect(this.renderedRoomImage).toHaveScreenshot(name, {
           maxDiffPixels: 0.2,
-          mask: [this.uploadBlock,this.roomImage(1),this.roomImage(2),this.roomImage(3),this.roomImage(4),this.roomImage(5),this.roomImage(6),this.visualizeFooter,this.doorsContainer],
+          mask: [this.header,this.visualizeFooter,this.doorsContainer],
         });
     }
 
@@ -56,10 +56,13 @@ export class RoomDoorViewerPage extends AppPage {
     }
     @step()
     async uploadNewphoto(folder:string,imgName:string){
+         await this.page.waitForTimeout(1000)
          this.uploadPhotoInput.setInputFiles(path.join(folder,imgName))
+         await this.page.waitForLoadState('networkidle')
     }
     @step() 
     async clickSaveNewDoorPositionButton(){
+        await this.page.waitForTimeout(1000)
         await expect(this.spinnerLoader).toHaveCount(0,{ timeout: 10000 })
         await expect(this.saveNewDoorPositionButton).toHaveText('Save',{ timeout: 10000 })
         await expect(this.saveNewDoorPositionButton).toBeVisible({ timeout: 10000 })
