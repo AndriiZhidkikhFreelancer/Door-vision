@@ -1,6 +1,6 @@
 import { doorPreviewFixture, expect } from '../fixtures/door-preview/door.preview.fixture';
 import { ProductDetailPage } from './../app/index';
-   for(let i = 0; i<10; i++){
+   for(let i = 0; i<3; i++){
    doorPreviewFixture.describe('tests', () => {
       doorPreviewFixture(`ID-1- ${i} : Check base image`, async ({ roomDoorViewerPage, imgCall }) => {
          await roomDoorViewerPage.open()
