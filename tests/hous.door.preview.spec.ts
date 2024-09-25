@@ -70,7 +70,7 @@ import { ProductDetailPage } from './../app/index';
          await expect(roomDoorViewerPage.door(door.creme)).toBeVisible()
          await expect(roomDoorViewerPage.doors).toHaveCount(3)
       });
-      doorPreviewFixture.only(`ID-13- ${i}: Click go to shop button`, async ({ roomDoorViewerPage, browser, context }) => {
+      doorPreviewFixture(`ID-13- ${i}: Click go to shop button`, async ({ roomDoorViewerPage, browser, context }) => {
          await roomDoorViewerPage.open()
          const version =  browser.version();
          console.log(`Версия браузера: ${version}`);
