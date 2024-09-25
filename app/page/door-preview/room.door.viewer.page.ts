@@ -5,7 +5,7 @@ const path = require('path');
 
 export class RoomDoorViewerPage extends AppPage {
     public pagePath = '/';
-    
+    private spinnerLoader= this.page.locator('div.spinner-border')
     private renderedRoomImage = this.page.locator('div.refine-panel canvas.refine-overlay.hide')
     private uploadBlock = this.page.locator('div.scenario.upload')
     private uploadPhotoInput = this.page.locator('input#upload-file')
@@ -30,7 +30,7 @@ export class RoomDoorViewerPage extends AppPage {
     public activeDoorMarkedAsFavourite (doorName: string) { return this.page.locator(`//p[text()="${doorName}"]/ancestor::div[@class="door active"]//i[@class="m-icon heart-solid"]`) }
     @step()
     async takeDoorViewerScreenshot(name:string) {
-        await this.page.waitForLoadState('load')
+        await this.page.waitForLoadState('networkidle')
         await expect(this.renderedRoomImage).toBeVisible()
         await this.page.waitForTimeout(2000)
         await expect(this.renderedRoomImage).toHaveScreenshot(name, {
@@ -42,10 +42,12 @@ export class RoomDoorViewerPage extends AppPage {
     @step()
     async clickDoor(name:string){
         await this.door(name).click()
-        await this.page.waitForLoadState('load')
+        await this.page.waitForLoadState('networkidle')
     }
     @step()
     async clickRoomImage(roomNumber:number){
+        await this.page.waitForLoadState('networkidle')
+        await expect(this.spinnerLoader).toHaveCount(0)
         await this.roomImage(roomNumber).click()
     }
     @step()
@@ -54,11 +56,13 @@ export class RoomDoorViewerPage extends AppPage {
     }
     @step()
     async uploadNewphoto(folder:string,imgName:string){
-        await this.uploadPhotoInput.setInputFiles(path.join(folder,imgName));
+         this.uploadPhotoInput.setInputFiles(path.join(folder,imgName))
     }
     @step() 
     async clickSaveNewDoorPositionButton(){
-        //await expect(this.saveNewDoorPositionButton).toBeVisible()
+        await expect(this.spinnerLoader).toHaveCount(0,{ timeout: 10000 })
+        await expect(this.saveNewDoorPositionButton).toHaveText('Save',{ timeout: 10000 })
+        await expect(this.saveNewDoorPositionButton).toBeVisible({ timeout: 10000 })
         await this.saveNewDoorPositionButton.click()
     }
     @step()
