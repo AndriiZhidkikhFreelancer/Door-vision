@@ -7,7 +7,7 @@ doorPreviewMobileFixture.describe('DV-1/01: Door preview - Mobile', () => {
       await expect(roomDoorMobileViewerPage.doorName).toBeVisible()
       await roomDoorMobileViewerPage.takeDoorViewerScreenshot('firstRoomWithOakDoor.png')
    });
-   doorPreviewMobileFixture(`ID-M4 : Open doors pane and close`, async ({ roomDoorMobileViewerPage, doorPanelMobilePage, door}) => {
+   doorPreviewMobileFixture(`ID-M4 : Open doors panel and close`, async ({ roomDoorMobileViewerPage, doorPanelMobilePage, door}) => {
       await roomDoorMobileViewerPage.open()
       await roomDoorMobileViewerPage.clickSwipeMenuButton()
       await doorPanelMobilePage.expectLoaded()
@@ -33,5 +33,21 @@ doorPreviewMobileFixture.describe('DV-1/01: Door preview - Mobile', () => {
       await expect(roomDoorMobileViewerPage.doorName).toBeVisible()
       await roomDoorMobileViewerPage.takeDoorViewerScreenshot('firstRoomWithAnthraziteDoor.png')
    });
+   doorPreviewMobileFixture(`ID-M6: Add three doors to the favourite from the door list`, async ({ roomDoorMobileViewerPage,doorPanelMobilePage, door }) => {
+      await roomDoorMobileViewerPage.open()
+      await roomDoorMobileViewerPage.clickSwipeMenuButton()
+      await doorPanelMobilePage.expectLoaded()
+      await doorPanelMobilePage.clickFavouriteMarkForActiveDoor()
+      await doorPanelMobilePage.clickFavouriteMarkForDoor(1)
+      await doorPanelMobilePage.clickFavouriteMarkForDoor(2)
+      await expect(doorPanelMobilePage.doorsMarkedAsFavourite).toHaveCount(3)
+      await doorPanelMobilePage.clickFavouriteButton()
+      await doorPanelMobilePage.expectLoaded()
+      await expect(doorPanelMobilePage.doors).toHaveCount(3)
+      await doorPanelMobilePage.clickFavouriteButton()
+      await doorPanelMobilePage.expectLoaded()
+      await expect(doorPanelMobilePage.doors).toHaveCount(7)
+   });
+   
    
 })
