@@ -19,6 +19,7 @@ export class RoomDoorViewerPage extends AppPage {
     private saveImgButton = this.page.locator('button[title="Save Image"]')
     private flipDoorButton = this.page.locator('button[title="Flip Door"]')
     private markFavouriteButton = this.page.locator('button[title="Mark Favourite"]')
+    private refinePositioningButton = this.page.locator('button[title="Refine Positioning"]')
 
     private doorsContainer = this.page.locator('div.door-list-container')
     public doors = this.page.locator('div.door')
@@ -84,6 +85,7 @@ export class RoomDoorViewerPage extends AppPage {
     @step()
     async clickFlipDoorButton(){
         await this.flipDoorButton.click()
+        await this.page.waitForLoadState('networkidle')
     }
     @step()
     async clickMarkFavouriteButton(){
@@ -102,5 +104,30 @@ export class RoomDoorViewerPage extends AppPage {
     async clickActiveDoorFavouriteMark(doorName:string){
         await this.activeDoor(doorName).hover()
         await this.activeDoorFavouriteMark(doorName).click()
+    }
+    @step()
+    async clickRefinePositioningButton(){
+        await this.refinePositioningButton.click()
+        await this.page.waitForLoadState('networkidle')
+    }
+    @step()
+    async changeDoorPosition(){
+        const buttons = [
+            { position: { x: 222, y: 194 }, offset: -50 }, 
+            { position: { x: 398, y: 191 }, offset: -50 },
+            { position: { x: 218, y: 591 }, offset: 50 }, 
+            { position: { x: 398, y: 587 }, offset: 50 }, 
+        ];
+    
+        for (const { position, offset } of buttons) {
+            const newPosition = {
+                x: position.x + offset,
+                y: position.y,
+            };
+            await this.page.mouse.move(position.x, position.y);
+            await this.page.mouse.down();
+            await this.page.mouse.move(newPosition.x, newPosition.y);
+            await this.page.mouse.up();
+         }
     }
 }
