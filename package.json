@@ -4,8 +4,11 @@
   "main": "index.js",
   "scripts": {
     "test":"npx playwright test",
-    "test:ui":"npx playwright test --headed",
-    "update-screens":"npx playwright test --update-snapshots"
+    "update-screens":"npx playwright test --update-snapshots",
+    "desk-ui":"npx playwright test --project=Desktop-Chrome --headed",
+    "desk-update-screens":"npx playwright test --project=Desktop-Chrome --update-snapshots",
+    "mob-ui":"npx playwright test --project=Mobile-Chrome --headed",
+    "mob-update-screens":"npx playwright test --project=Mobile-Chrome --update-snapshots"
   },
   "keywords": [],
   "author": "",

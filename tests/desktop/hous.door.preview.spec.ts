@@ -1,6 +1,6 @@
-import { doorPreviewFixture, expect } from '../fixtures/door-preview/door.preview.fixture';
-import { ProductDetailPage } from './../app/index';
-   doorPreviewFixture.describe('tests', () => {
+import { doorPreviewFixture, expect } from '../../fixtures/door-preview/door.preview.fixture';
+import { ProductDetailPage } from '../../app/index';
+   doorPreviewFixture.describe('DV-1/01: Door preview - Desctop', () => {
       doorPreviewFixture(`ID-1:Check base image`, async ({ roomDoorViewerPage }) => {
          await roomDoorViewerPage.open()
          await roomDoorViewerPage.takeDoorViewerScreenshot('firstRoomWithOakDoor.png')
