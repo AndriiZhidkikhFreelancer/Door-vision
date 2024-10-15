@@ -17,4 +17,9 @@ export class DoorPanelMobilePage extends AppPage {
             }
         });
     }
+    @step()
+    async clickDoor(number:number) {
+        await this.door(number).click()
+        await this.page.waitForLoadState('networkidle')
+    }
 }
