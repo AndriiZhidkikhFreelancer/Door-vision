@@ -48,6 +48,15 @@ doorPreviewMobileFixture.describe('DV-1/01: Door preview - Mobile', () => {
       await doorPanelMobilePage.expectLoaded()
       await expect(doorPanelMobilePage.doors).toHaveCount(7)
    });
+   doorPreviewMobileFixture(`ID-M7: Upload new image`, async ({ roomDoorMobileViewerPage, door }) => {
+      await roomDoorMobileViewerPage.open()
+      await expect(roomDoorMobileViewerPage.doorName).toHaveText(door.oak)
+      await expect(roomDoorMobileViewerPage.doorName).toBeVisible()
+      await roomDoorMobileViewerPage.clickUploadPhotoButton()
+      await roomDoorMobileViewerPage.uploadNewphoto('docs/img', 'newDoor.jpg')
+      await roomDoorMobileViewerPage.clickSaveNewDoorPositionButton()
+      await roomDoorMobileViewerPage.takeDoorViewerScreenshot('newRoomWithOakDoor.png')
+   });
    
    
 })

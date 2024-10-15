@@ -43,6 +43,25 @@ export class RoomDoorMobileViewerPage extends AppPage {
     async clickSwipeMenuButton(){
         await this.swipeMenuButton.click()
     }
+    @step()
+    async clickUploadPhotoButton(){
+        await this.uploadPhotoButton.click()
+    }
+    @step()
+    async uploadNewphoto(folder:string,imgName:string){
+         await this.page.waitForTimeout(1000)
+         this.uploadPhotoInput.setInputFiles(path.join(folder,imgName))
+         await this.page.waitForLoadState('networkidle')
+    }
+    @step() 
+    async clickSaveNewDoorPositionButton(){
+        await this.page.waitForTimeout(1000)
+        await expect(this.spinnerLoader).toHaveCount(0,{ timeout: 10000 })
+        await expect(this.saveNewDoorPositionButton).toHaveText('Save',{ timeout: 10000 })
+        await expect(this.saveNewDoorPositionButton).toBeVisible({ timeout: 10000 })
+        await this.page.waitForTimeout(500)
+        await this.saveNewDoorPositionButton.click()
+    }
   
 
 }
