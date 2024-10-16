@@ -38,6 +38,15 @@ export class BurgerMenuMobilePage extends AppPage {
         await this.closeMenuButton.click()
     }
 
-
+    async mockShareDialog(): Promise<void> {
+        await this.page.evaluate(() => {
+          (window as any).waitForShareDialog = new Promise(resolve => {
+            (navigator as any).share = resolve; // Мокаем вызов share
+          });
+        });
+      }
+      async waitForShareDialog(): Promise<void> {
+        await this.page.waitForFunction('window.waitForShareDialog');
+      }
    
 }

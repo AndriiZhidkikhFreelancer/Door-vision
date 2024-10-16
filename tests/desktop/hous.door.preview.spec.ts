@@ -91,7 +91,15 @@ import { ProductDetailPage } from '../../app/index';
          await roomDoorViewerPage.clickFlipDoorButton()
          await roomDoorViewerPage.takeDoorViewerScreenshot('flippedNewRoomWithOakDoor.png')
       });
-      doorPreviewFixture('ID-12: Click share link', async ({ roomDoorViewerPage, context }) => {
+      doorPreviewFixture('ID-12:Click share linkg', async ({roomDoorViewerPage, page }) => {
+         await roomDoorViewerPage.open()
+         await roomDoorViewerPage.uploadNewphoto('docs/img', 'newDoor.jpg')
+         await roomDoorViewerPage.clickSaveNewDoorPositionButton()
+         await roomDoorViewerPage.mockShareDialog()
+         await roomDoorViewerPage.clickShareLinkButton()
+         await roomDoorViewerPage.waitForShareDialog()
+       });
+      doorPreviewFixture('ID-13: Click go to shop button', async ({ roomDoorViewerPage, context }) => {
          await roomDoorViewerPage.open()
          await roomDoorViewerPage.uploadNewphoto('docs/img', 'newDoor.jpg')
          await roomDoorViewerPage.clickSaveNewDoorPositionButton()

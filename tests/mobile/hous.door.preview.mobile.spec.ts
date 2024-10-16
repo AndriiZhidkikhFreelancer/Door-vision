@@ -1,4 +1,5 @@
 import { doorPreviewMobileFixture, expect } from '../../fixtures/door-preview/mobile/door.preview.mobile.fixture';
+import { ProductDetailPage } from '../../app/index';
 
 doorPreviewMobileFixture.describe('DV-1/01: Door preview - Mobile', () => {
    doorPreviewMobileFixture(`ID-M1 : Check base image`, async ({ roomDoorMobileViewerPage, door }) => {
@@ -194,6 +195,11 @@ doorPreviewMobileFixture.describe('DV-1/01: Door preview - Mobile', () => {
       await roomDoorMobileViewerPage.open()
       await expect(roomDoorMobileViewerPage.doorName).toHaveText(door.oak)
       await expect(roomDoorMobileViewerPage.doorName).toBeVisible()
+      await roomDoorMobileViewerPage.clickUploadPhotoButton()
+      await roomDoorMobileViewerPage.uploadNewphoto('docs/img', 'newDoor.jpg')
+      await roomDoorMobileViewerPage.clickSaveNewDoorPositionButton()
+      await expect(roomDoorMobileViewerPage.doorName).toHaveText(door.oak)
+      await expect(roomDoorMobileViewerPage.doorName).toBeVisible()
       await roomDoorMobileViewerPage.clickMenuButton()
       await burgerMenuMobilePage.expectLoaded() 
       await burgerMenuMobilePage.clickSaveImgButton()
@@ -202,11 +208,49 @@ doorPreviewMobileFixture.describe('DV-1/01: Door preview - Mobile', () => {
       await roomDoorMobileViewerPage.open()
       await expect(roomDoorMobileViewerPage.doorName).toHaveText(door.oak)
       await expect(roomDoorMobileViewerPage.doorName).toBeVisible()
+      await roomDoorMobileViewerPage.clickUploadPhotoButton()
+      await roomDoorMobileViewerPage.uploadNewphoto('docs/img', 'newDoor.jpg')
+      await roomDoorMobileViewerPage.clickSaveNewDoorPositionButton()
+      await expect(roomDoorMobileViewerPage.doorName).toHaveText(door.oak)
+      await expect(roomDoorMobileViewerPage.doorName).toBeVisible()
       await roomDoorMobileViewerPage.clickMenuButton()
       await burgerMenuMobilePage.expectLoaded() 
       await burgerMenuMobilePage.clickFlipDoorButton()
       await expect(burgerMenuMobilePage.roomsImageSection).toHaveCount(0)
       await roomDoorMobileViewerPage.takeDoorViewerScreenshot('flippedNewRoomWithOakDoor.png')
    });
+   doorPreviewMobileFixture.only('ID-M14:Click share link', async ({roomDoorMobileViewerPage,burgerMenuMobilePage, door }) => {
+      await roomDoorMobileViewerPage.open()
+      await expect(roomDoorMobileViewerPage.doorName).toHaveText(door.oak)
+      await expect(roomDoorMobileViewerPage.doorName).toBeVisible()
+      await roomDoorMobileViewerPage.clickUploadPhotoButton()
+      await roomDoorMobileViewerPage.uploadNewphoto('docs/img', 'newDoor.jpg')
+      await roomDoorMobileViewerPage.clickSaveNewDoorPositionButton()
+      await expect(roomDoorMobileViewerPage.doorName).toHaveText(door.oak)
+      await expect(roomDoorMobileViewerPage.doorName).toBeVisible()
+      await roomDoorMobileViewerPage.clickMenuButton()
+      await burgerMenuMobilePage.expectLoaded() 
+      await burgerMenuMobilePage.mockShareDialog()
+      await burgerMenuMobilePage.clickShareLinkButton()
+      await burgerMenuMobilePage.waitForShareDialog()
+    });
+   doorPreviewMobileFixture('ID-15:Click go to shop button', async ({ roomDoorMobileViewerPage, context, door }) => {
+      await roomDoorMobileViewerPage.open()
+      await roomDoorMobileViewerPage.clickUploadPhotoButton()
+      await roomDoorMobileViewerPage.uploadNewphoto('docs/img', 'newDoor.jpg')
+      await roomDoorMobileViewerPage.clickSaveNewDoorPositionButton()
+      await expect(roomDoorMobileViewerPage.doorName).toHaveText(door.oak)
+      await expect(roomDoorMobileViewerPage.doorName).toBeVisible()
+      await expect(roomDoorMobileViewerPage.goToShopButton).toBeVisible()
+      const [newPage] = await Promise.all([
+         context.waitForEvent('page'),
+         await roomDoorMobileViewerPage.clickGoToShopButton()
+      ])
+      await newPage.bringToFront();
+      const productDetailPage = new ProductDetailPage(newPage)
+      await expect(productDetailPage.pageTitle).toHaveText('Hey, ')
+      await expect(productDetailPage.pageTitle).toBeVisible()
+      expect(newPage).toHaveURL('https://www.door-vision.com/productdetail')
+   }); 
    
 })

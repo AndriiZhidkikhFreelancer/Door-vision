@@ -130,4 +130,14 @@ export class RoomDoorViewerPage extends AppPage {
             await this.page.mouse.up();
          }
     }
+    async mockShareDialog(): Promise<void> {
+        await this.page.evaluate(() => {
+          (window as any).waitForShareDialog = new Promise(resolve => {
+            (navigator as any).share = resolve; // Мокаем вызов share
+          });
+        });
+      }
+      async waitForShareDialog(): Promise<void> {
+        await this.page.waitForFunction('window.waitForShareDialog');
+      }
 }

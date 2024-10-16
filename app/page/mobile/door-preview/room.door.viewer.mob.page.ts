@@ -77,4 +77,10 @@ export class RoomDoorMobileViewerPage extends AppPage {
         await this.menuButton.click()
 
     }
+    @step()
+    async clickGoToShopButton(){
+        await this.goToShopButton.click()
+
+    }
+    
 }
