@@ -7,11 +7,19 @@ doorPreviewMobileFixture.describe('DV-1/01: Door preview - Mobile', () => {
       await expect(roomDoorMobileViewerPage.doorName).toBeVisible()
       await roomDoorMobileViewerPage.takeDoorViewerScreenshot('firstRoomWithOakDoor.png')
    });
-   doorPreviewMobileFixture(`ID-M2 : Check base image`, async ({ roomDoorMobileViewerPage, door }) => {
+   doorPreviewMobileFixture(`ID-M2 : Choose next doors`, async ({ roomDoorMobileViewerPage, door }) => {
       await roomDoorMobileViewerPage.open()
       await expect(roomDoorMobileViewerPage.doorName).toHaveText(door.oak)
       await expect(roomDoorMobileViewerPage.doorName).toBeVisible()
-      await roomDoorMobileViewerPage.takeDoorViewerScreenshot('firstRoomWithOakDoor.png')
+      roomDoorMobileViewerPage.clickNextDoorArrow()
+      await expect(roomDoorMobileViewerPage.doorName).toHaveText(door.creme)
+      await expect(roomDoorMobileViewerPage.doorName).toBeVisible()
+      await roomDoorMobileViewerPage.takeDoorViewerScreenshot('firstRoomWithCremeDoor.png')
+      roomDoorMobileViewerPage.clickNextDoorArrow()
+      await expect(roomDoorMobileViewerPage.doorName).toHaveText(door.maple)
+      await expect(roomDoorMobileViewerPage.doorName).toBeVisible()
+      await roomDoorMobileViewerPage.takeDoorViewerScreenshot('firstRoomWithMapleDoor.png')
+
    });
    doorPreviewMobileFixture(`ID-M4 : Open doors panel and close`, async ({ roomDoorMobileViewerPage, doorPanelMobilePage, door}) => {
       await roomDoorMobileViewerPage.open()

@@ -62,6 +62,13 @@ export class RoomDoorMobileViewerPage extends AppPage {
         await this.page.waitForTimeout(500)
         await this.saveNewDoorPositionButton.click()
     }
-  
+    @step()
+    async clickNextDoorArrow(){
+        await this.nextDoorArrow.click()
+    }
+    @step()
+    async clickPreviousDoorArrow(){
+        await this.previousDoorArrow.click()
+    }
 
 }
