@@ -7,6 +7,12 @@ doorPreviewMobileFixture.describe('DV-1/01: Door preview - Mobile', () => {
       await expect(roomDoorMobileViewerPage.doorName).toBeVisible()
       await roomDoorMobileViewerPage.takeDoorViewerScreenshot('firstRoomWithOakDoor.png')
    });
+   doorPreviewMobileFixture(`ID-M2 : Check base image`, async ({ roomDoorMobileViewerPage, door }) => {
+      await roomDoorMobileViewerPage.open()
+      await expect(roomDoorMobileViewerPage.doorName).toHaveText(door.oak)
+      await expect(roomDoorMobileViewerPage.doorName).toBeVisible()
+      await roomDoorMobileViewerPage.takeDoorViewerScreenshot('firstRoomWithOakDoor.png')
+   });
    doorPreviewMobileFixture(`ID-M4 : Open doors panel and close`, async ({ roomDoorMobileViewerPage, doorPanelMobilePage, door}) => {
       await roomDoorMobileViewerPage.open()
       await roomDoorMobileViewerPage.clickSwipeMenuButton()
@@ -56,6 +62,30 @@ doorPreviewMobileFixture.describe('DV-1/01: Door preview - Mobile', () => {
       await roomDoorMobileViewerPage.uploadNewphoto('docs/img', 'newDoor.jpg')
       await roomDoorMobileViewerPage.clickSaveNewDoorPositionButton()
       await roomDoorMobileViewerPage.takeDoorViewerScreenshot('newRoomWithOakDoor.png')
+      await expect(roomDoorMobileViewerPage.doorName).toHaveText(door.oak)
+      await expect(roomDoorMobileViewerPage.doorName).toBeVisible()
+   });
+   doorPreviewMobileFixture(`ID-M8: Choose new doors for an uploaded image`, async ({ roomDoorMobileViewerPage, doorPanelMobilePage,door }) => {
+      await roomDoorMobileViewerPage.open()
+      await expect(roomDoorMobileViewerPage.doorName).toHaveText(door.oak)
+      await expect(roomDoorMobileViewerPage.doorName).toBeVisible()
+      await roomDoorMobileViewerPage.clickUploadPhotoButton()
+      await roomDoorMobileViewerPage.uploadNewphoto('docs/img', 'newDoor.jpg')
+      await roomDoorMobileViewerPage.clickSaveNewDoorPositionButton()
+      await expect(roomDoorMobileViewerPage.doorName).toHaveText(door.oak)
+      await expect(roomDoorMobileViewerPage.doorName).toBeVisible()
+      await roomDoorMobileViewerPage.clickSwipeMenuButton()
+      await doorPanelMobilePage.expectLoaded()
+      await doorPanelMobilePage.clickDoor(7)
+      await expect(roomDoorMobileViewerPage.doorName).toHaveText(door.anthrazite)
+      await expect(roomDoorMobileViewerPage.doorName).toBeVisible()
+      await roomDoorMobileViewerPage.takeDoorViewerScreenshot('newRoomWithAnthraziteDoor.png')
+      await roomDoorMobileViewerPage.clickSwipeMenuButton()
+      await doorPanelMobilePage.expectLoaded()
+      await doorPanelMobilePage.clickDoor(3)
+      await expect(roomDoorMobileViewerPage.doorName).toHaveText(door.maple)
+      await expect(roomDoorMobileViewerPage.doorName).toBeVisible()
+      await roomDoorMobileViewerPage.takeDoorViewerScreenshot('newRoomWithMapleDoor.png')
    });
    
    
