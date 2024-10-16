@@ -1,5 +1,6 @@
 import { doorPreviewMobileFixture, expect } from '../../fixtures/door-preview/mobile/door.preview.mobile.fixture';
 import { ProductDetailPage } from '../../app/index';
+const path = require('path');
 
 doorPreviewMobileFixture.describe('DV-1/01: Door preview - Mobile', () => {
    doorPreviewMobileFixture(`ID-M1 : Check base image`, async ({ roomDoorMobileViewerPage, door }) => {
@@ -202,7 +203,9 @@ doorPreviewMobileFixture.describe('DV-1/01: Door preview - Mobile', () => {
       await expect(roomDoorMobileViewerPage.doorName).toBeVisible()
       await roomDoorMobileViewerPage.clickMenuButton()
       await burgerMenuMobilePage.expectLoaded() 
-      await burgerMenuMobilePage.clickSaveImgButton()
+      const downloadedImagePath = await burgerMenuMobilePage.saveDownloadedImage();
+      const referenceImagePath = path.resolve('docs/img/downloaded.oak.mobile.png');
+      await burgerMenuMobilePage.verifyDownloadedImage(downloadedImagePath, referenceImagePath); 
    });
    doorPreviewMobileFixture(`ID-M13 : Flip door`, async ({ roomDoorMobileViewerPage,burgerMenuMobilePage, door }) => {
       await roomDoorMobileViewerPage.open()
@@ -219,7 +222,7 @@ doorPreviewMobileFixture.describe('DV-1/01: Door preview - Mobile', () => {
       await expect(burgerMenuMobilePage.roomsImageSection).toHaveCount(0)
       await roomDoorMobileViewerPage.takeDoorViewerScreenshot('flippedNewRoomWithOakDoor.png')
    });
-   doorPreviewMobileFixture.only('ID-M14:Click share link', async ({roomDoorMobileViewerPage,burgerMenuMobilePage, door }) => {
+   doorPreviewMobileFixture('ID-M14:Click share link', async ({roomDoorMobileViewerPage,burgerMenuMobilePage, door }) => {
       await roomDoorMobileViewerPage.open()
       await expect(roomDoorMobileViewerPage.doorName).toHaveText(door.oak)
       await expect(roomDoorMobileViewerPage.doorName).toBeVisible()

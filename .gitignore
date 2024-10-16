@@ -4,3 +4,5 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 *xlsx
+app/page/desktop/door-preview/downloads/
+app/page/mobile/door-preview/downloads/

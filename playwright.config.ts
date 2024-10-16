@@ -40,6 +40,7 @@ export default defineConfig({
         ...devices['Desktop Chrome'],
         baseURL: 'https://testautomation.test.door-vision.cloud/?s=USER_IyuDiH',
       },
+
       testDir: './tests/desktop',
     },
     {
