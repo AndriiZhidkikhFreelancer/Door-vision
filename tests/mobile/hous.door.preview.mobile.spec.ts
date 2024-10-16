@@ -190,5 +190,23 @@ doorPreviewMobileFixture.describe('DV-1/01: Door preview - Mobile', () => {
       await expect(roomDoorMobileViewerPage.doorName).toBeVisible()
       await expect(burgerMenuMobilePage.roomsImageSection).toHaveCount(0)
    });
+   doorPreviewMobileFixture(`ID-M12 : Save image`, async ({ roomDoorMobileViewerPage, burgerMenuMobilePage, door }) => {
+      await roomDoorMobileViewerPage.open()
+      await expect(roomDoorMobileViewerPage.doorName).toHaveText(door.oak)
+      await expect(roomDoorMobileViewerPage.doorName).toBeVisible()
+      await roomDoorMobileViewerPage.clickMenuButton()
+      await burgerMenuMobilePage.expectLoaded() 
+      await burgerMenuMobilePage.clickSaveImgButton()
+   });
+   doorPreviewMobileFixture(`ID-M13 : Flip door`, async ({ roomDoorMobileViewerPage,burgerMenuMobilePage, door }) => {
+      await roomDoorMobileViewerPage.open()
+      await expect(roomDoorMobileViewerPage.doorName).toHaveText(door.oak)
+      await expect(roomDoorMobileViewerPage.doorName).toBeVisible()
+      await roomDoorMobileViewerPage.clickMenuButton()
+      await burgerMenuMobilePage.expectLoaded() 
+      await burgerMenuMobilePage.clickFlipDoorButton()
+      await expect(burgerMenuMobilePage.roomsImageSection).toHaveCount(0)
+      await roomDoorMobileViewerPage.takeDoorViewerScreenshot('flippedNewRoomWithOakDoor.png')
+   });
    
 })
