@@ -7,7 +7,7 @@ doorPreviewMobileFixture.describe('DV-1/01: Door preview - Mobile', () => {
       await expect(roomDoorMobileViewerPage.doorName).toBeVisible()
       await roomDoorMobileViewerPage.takeDoorViewerScreenshot('firstRoomWithOakDoor.png')
    });
-   doorPreviewMobileFixture(`ID-M2 : Choose next doors`, async ({ roomDoorMobileViewerPage, door }) => {
+   doorPreviewMobileFixture.only(`ID-M2 : Choose next doors`, async ({ roomDoorMobileViewerPage, door }) => {
       await roomDoorMobileViewerPage.open()
       await expect(roomDoorMobileViewerPage.doorName).toHaveText(door.oak)
       await expect(roomDoorMobileViewerPage.doorName).toBeVisible()
@@ -19,7 +19,37 @@ doorPreviewMobileFixture.describe('DV-1/01: Door preview - Mobile', () => {
       await expect(roomDoorMobileViewerPage.doorName).toHaveText(door.maple)
       await expect(roomDoorMobileViewerPage.doorName).toBeVisible()
       await roomDoorMobileViewerPage.takeDoorViewerScreenshot('firstRoomWithMapleDoor.png')
-
+      roomDoorMobileViewerPage.clickNextDoorArrow()
+      await expect(roomDoorMobileViewerPage.doorName).toHaveText(door['crack oak'])
+      await expect(roomDoorMobileViewerPage.doorName).toBeVisible()
+      await roomDoorMobileViewerPage.takeDoorViewerScreenshot('firstRoomWithCrackOakDoor.png')
+   });
+   doorPreviewMobileFixture(`ID-M3 : Choose previous doors`, async ({ roomDoorMobileViewerPage, door }) => {
+      await roomDoorMobileViewerPage.open()
+      await expect(roomDoorMobileViewerPage.doorName).toHaveText(door.oak)
+      await expect(roomDoorMobileViewerPage.doorName).toBeVisible()
+      roomDoorMobileViewerPage.clickNextDoorArrow()
+      await expect(roomDoorMobileViewerPage.doorName).toHaveText(door.creme)
+      await expect(roomDoorMobileViewerPage.doorName).toBeVisible()
+      roomDoorMobileViewerPage.clickNextDoorArrow()
+      await expect(roomDoorMobileViewerPage.doorName).toHaveText(door.maple)
+      await expect(roomDoorMobileViewerPage.doorName).toBeVisible()
+      roomDoorMobileViewerPage.clickNextDoorArrow()
+      await expect(roomDoorMobileViewerPage.doorName).toHaveText(door['crack oak'])
+      await expect(roomDoorMobileViewerPage.doorName).toBeVisible()
+      roomDoorMobileViewerPage.clickPreviousDoorArrow()
+      await expect(roomDoorMobileViewerPage.doorName).toHaveText(door.maple)
+      await expect(roomDoorMobileViewerPage.doorName).toBeVisible()
+      await roomDoorMobileViewerPage.takeDoorViewerScreenshot('firstRoomWithMapleDoor.png')
+      roomDoorMobileViewerPage.clickPreviousDoorArrow()
+      await expect(roomDoorMobileViewerPage.doorName).toHaveText(door.creme)
+      await expect(roomDoorMobileViewerPage.doorName).toBeVisible()
+      await roomDoorMobileViewerPage.takeDoorViewerScreenshot('firstRoomWithCremeDoor.png')
+      roomDoorMobileViewerPage.clickPreviousDoorArrow()
+      await roomDoorMobileViewerPage.open()
+      await expect(roomDoorMobileViewerPage.doorName).toHaveText(door.oak)
+      await expect(roomDoorMobileViewerPage.doorName).toBeVisible()
+      await roomDoorMobileViewerPage.takeDoorViewerScreenshot('firstRoomWithOakDoor.png')
    });
    doorPreviewMobileFixture(`ID-M4 : Open doors panel and close`, async ({ roomDoorMobileViewerPage, doorPanelMobilePage, door}) => {
       await roomDoorMobileViewerPage.open()
