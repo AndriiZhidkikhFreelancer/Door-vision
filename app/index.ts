@@ -3,3 +3,4 @@ export { ProductDetailPage } from './page/desktop/door-preview/product.detail.pa
 
 export { RoomDoorMobileViewerPage } from './page/mobile/door-preview/room.door.viewer.mob.page'
 export { DoorPanelMobilePage } from './page/mobile/door-preview/door.panel.mob.page'
+export { BurgerMenuMobilePage } from './page/mobile/door-preview/burger.menu.mob.page'

@@ -1,12 +1,13 @@
 import { test as base } from '@playwright/test';
 import { DoorManager } from '../../../api/index';
-import { RoomDoorMobileViewerPage, DoorPanelMobilePage } from '../../../app/index';
+import { RoomDoorMobileViewerPage, DoorPanelMobilePage, BurgerMenuMobilePage } from '../../../app/index';
 import { doors } from '../../../app/data/desktop/doors.data';
 
 // Declare the types of your fixtures.
 type MyFixtures = {
   doorManager: DoorManager,
   roomDoorMobileViewerPage: RoomDoorMobileViewerPage,
+  burgerMenuMobilePage: BurgerMenuMobilePage,
   doorPanelMobilePage: DoorPanelMobilePage,
   door: typeof doors
 };
@@ -32,6 +33,10 @@ export const doorPreviewMobileFixture = base.extend<MyFixtures>({
   doorPanelMobilePage: async ({ page }, use) => {
     const doorPanelMobilePage = new DoorPanelMobilePage(page)
     await use(doorPanelMobilePage)
+  },
+  burgerMenuMobilePage: async ({ page }, use) => {
+    const burgerMenuMobilePage = new BurgerMenuMobilePage(page)
+    await use(burgerMenuMobilePage)
   },
   door: async ({}, use) => {
     const door = doors
