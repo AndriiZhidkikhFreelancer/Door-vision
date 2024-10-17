@@ -77,7 +77,7 @@ export class RoomDoorMobileViewerPage extends AppPage {
     @step()
     async clickMenuButton(){
         await this.menuButton.click()
-
+        await this.page.waitForLoadState('networkidle')
     }
     @step()
     async clickGoToShopButton(){

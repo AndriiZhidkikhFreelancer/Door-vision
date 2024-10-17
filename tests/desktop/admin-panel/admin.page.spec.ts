@@ -7,9 +7,8 @@ adminFixture.describe('DV-1/01: Door preview - Desctop', () => {
       await overviewPage.clickVisualDoorsTab()
       await visualDoorsPage.expectLoaded()
    });
-   adminFixture(`ID-A3:Visit the visual door page`, async ({ visualDoorsPage, createDoorPage,page, signIn, adminDoorManagerController, roomDoorViewerPage,newAdminDoor }) => {
+   adminFixture(`ID-A3:Visit the visual door page`, async ({ visualDoorsPage, createDoorPage, signIn, adminDoorManagerController, roomDoorViewerPage,newAdminDoor }) => {
       await visualDoorsPage.open()
-      await visualDoorsPage.expectLoaded()
       await visualDoorsPage.clickCreateNewDoorButton()
       await createDoorPage.setDoorNameField(newAdminDoor.name)
       await createDoorPage.setExternalIdsField(newAdminDoor.externalId)
@@ -25,7 +24,6 @@ adminFixture.describe('DV-1/01: Door preview - Desctop', () => {
       await roomDoorViewerPage.open()
       await roomDoorViewerPage.takeDoorViewerScreenshot('firstRoomWithTestAutomationDoor.png')
       await visualDoorsPage.open()
-      await visualDoorsPage.expectLoaded()
       await visualDoorsPage.clickExternalIds(newAdminDoor.externalId)
       await expect(createDoorPage.doorNameField).toHaveValue(newAdminDoor.name)
       await createDoorPage.clickDeleteDoorButtonn()

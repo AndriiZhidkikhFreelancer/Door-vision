@@ -19,18 +19,22 @@ export class CreateDoorPage extends AppPage {
     @step()
     async setDoorNameField(text:string) {
         await this.doorNameField.type(text)
+        await expect(this.doorNameField).toHaveValue(text)
     }
     @step()
     async setExternalIdsField(text:string) {
         await this.externalIdsField.type(text)
+        await expect(this.externalIdsField).toHaveValue(text)
     }
     @step()
     async setShopLinkField(text:string) {
         await this.shopLinkField.type(text)
+        await expect(this.shopLinkField).toHaveValue(text)
     }
     @step()
     async setPriceField(text:string) {
         await this.priceField.type(text)
+        await expect(this.priceField).toHaveValue(text)
     }
     @step()
     async choosePriceCurrency(text:string) {
