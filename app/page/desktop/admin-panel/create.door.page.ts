@@ -21,25 +21,25 @@ export class CreateDoorPage extends AppPage {
     @step()
     async setDoorNameField(text:string) {
         await this.page.waitForLoadState('networkidle')
-        await this.doorNameField.fill(text)
+        await this.doorNameField.type(text, { delay: 50 })
         await expect(this.doorNameField).toHaveValue(text)
     }
     @step()
     async setExternalIdsField(text:string) {
         await this.page.waitForLoadState('networkidle')
-        await this.externalIdsField.fill(text)
+        await this.externalIdsField.type(text, { delay: 50 })
         await expect(this.externalIdsField).toHaveValue(text)
     }
     @step()
     async setShopLinkField(text:string) {
         await this.page.waitForLoadState('networkidle')
-        await this.shopLinkField.fill(text)
+        await this.shopLinkField.type(text, { delay: 50 })
         await expect(this.shopLinkField).toHaveValue(text)
     }
     @step()
     async setPriceField(text:string) {
         await this.page.waitForLoadState('networkidle')
-        await this.priceField.fill(text)
+        await this.priceField.type(text, { delay: 50 })
         await expect(this.priceField).toHaveValue(text)
     }
     @step()
