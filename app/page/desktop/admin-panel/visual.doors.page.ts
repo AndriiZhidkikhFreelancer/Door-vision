@@ -9,6 +9,7 @@ export class VisualDoorsPage extends AppPage {
     private visualDoorsTitle = this.page.locator('h3')
     public externalIds(roomIds: string) { return this.page.locator(`//td[text()="${roomIds}"]`) }
 
+
     @step()
     async expectLoaded() {
         await expect(this.visualDoorsTitle).toBeVisible();

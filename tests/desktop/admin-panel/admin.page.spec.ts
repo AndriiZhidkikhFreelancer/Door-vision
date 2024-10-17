@@ -10,6 +10,7 @@ adminFixture.describe('DV-1/01: Door preview - Desctop', () => {
    adminFixture(`ID-A3:Visit the visual door page`, async ({ visualDoorsPage, createDoorPage, signIn, adminDoorManagerController, roomDoorViewerPage,newAdminDoor }) => {
       await visualDoorsPage.open()
       await visualDoorsPage.clickCreateNewDoorButton()
+      await expect(createDoorPage.title).toHaveText('Create new visual door')
       await createDoorPage.setDoorNameField(newAdminDoor.name)
       await createDoorPage.setExternalIdsField(newAdminDoor.externalId)
       await createDoorPage.setShopLinkField(newAdminDoor.shopLink)
@@ -29,7 +30,7 @@ adminFixture.describe('DV-1/01: Door preview - Desctop', () => {
       await createDoorPage.clickDeleteDoorButtonn()
       await expect(createDoorPage.alertMessage).toHaveText('Visual door successfully deleted')
       await visualDoorsPage.open()
-      await visualDoorsPage.expectLoaded()
+      await expect(visualDoorsPage.externalIds('oak').first()).toBeVisible()
       await expect(visualDoorsPage.externalIds(newAdminDoor.externalId)).toHaveCount(0)
    });
 });

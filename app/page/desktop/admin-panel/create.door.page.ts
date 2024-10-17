@@ -6,6 +6,7 @@ const path = require('path');
 export class CreateDoorPage extends AppPage {
     public pagePath = 'https://admin.test.door-vision.cloud/visual-doors/new'
     public doorNameField = this.page.locator('input#name')
+    public title = this.page.locator('h3')
     private externalIdsField = this.page.locator('input#externalIds')
     private shopLinkField = this.page.locator('input#showNowLink')
     private priceField = this.page.locator('input#priceValue')
@@ -15,29 +16,35 @@ export class CreateDoorPage extends AppPage {
     public alertMessage = this.page.locator('div[role="alert"]')
     public newDoorImg = this.page.locator('app-show-visual-door div img')
     private deleteDoorButton = this.page.locator('//button[text()="Delete "]')
+   
 
     @step()
     async setDoorNameField(text:string) {
-        await this.doorNameField.type(text)
+        await this.page.waitForLoadState('networkidle')
+        await this.doorNameField.fill(text)
         await expect(this.doorNameField).toHaveValue(text)
     }
     @step()
     async setExternalIdsField(text:string) {
-        await this.externalIdsField.type(text)
+        await this.page.waitForLoadState('networkidle')
+        await this.externalIdsField.fill(text)
         await expect(this.externalIdsField).toHaveValue(text)
     }
     @step()
     async setShopLinkField(text:string) {
-        await this.shopLinkField.type(text)
+        await this.page.waitForLoadState('networkidle')
+        await this.shopLinkField.fill(text)
         await expect(this.shopLinkField).toHaveValue(text)
     }
     @step()
     async setPriceField(text:string) {
-        await this.priceField.type(text)
+        await this.page.waitForLoadState('networkidle')
+        await this.priceField.fill(text)
         await expect(this.priceField).toHaveValue(text)
     }
     @step()
     async choosePriceCurrency(text:string) {
+        await this.page.waitForLoadState('networkidle')
         await this.priceCurrencySelect.selectOption(text)
     }
     @step()
@@ -46,6 +53,7 @@ export class CreateDoorPage extends AppPage {
     }
     @step()
     async clickSaveButton() {
+        await this.page.waitForLoadState('networkidle')
         await this.saveButton.click()
     }
     @step()

@@ -154,6 +154,7 @@ export class RoomDoorViewerPage extends AppPage {
         const download = await downloadPromise;
         const downloadPath = path.join(__dirname, './downloads', download.suggestedFilename()!);
         await download.saveAs(downloadPath);
+        console.log(`Файл сохранен по пути: ${downloadPath}`);
         return downloadPath; 
     }
     @step()
