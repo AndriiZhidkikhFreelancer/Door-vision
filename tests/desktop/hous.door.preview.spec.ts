@@ -3,23 +3,23 @@ import { ProductDetailPage } from '../../app/index';
 import path from 'path';
 
 doorPreviewFixture.describe('DV-1/01: Door preview - Desctop', () => {
-   doorPreviewFixture(`ID-1:Check base image`, async ({ roomDoorViewerPage }) => {
+   doorPreviewFixture(`ID-1:Check base image`, async ({ roomDoorViewerPage,adminDoorManagerController }) => {
       await roomDoorViewerPage.open()
       await roomDoorViewerPage.takeDoorViewerScreenshot('firstRoomWithOakDoor.png')
    });
-   doorPreviewFixture(`ID-2:Change doors`, async ({ roomDoorViewerPage, door }) => {
+   doorPreviewFixture(`ID-2:Change doors`, async ({ roomDoorViewerPage,adminDoorManagerController, door }) => {
       await roomDoorViewerPage.open()
       await roomDoorViewerPage.clickDoor(door.creme)
       await roomDoorViewerPage.takeDoorViewerScreenshot('firstRoomWithCremeDoor.png')
       await roomDoorViewerPage.clickDoor(door.anthrazite)
       await roomDoorViewerPage.takeDoorViewerScreenshot('firstRoomWithAnthraziteDoor.png')
    });
-   doorPreviewFixture(`ID-3:Check fourth base image`, async ({ roomDoorViewerPage }) => {
+   doorPreviewFixture(`ID-3:Check fourth base image`, async ({ roomDoorViewerPage , adminDoorManagerController}) => {
       await roomDoorViewerPage.open()
       await roomDoorViewerPage.clickRoomImage(4)
       await roomDoorViewerPage.takeDoorViewerScreenshot('fourthRoomWithOakDoor.png')
    });
-   doorPreviewFixture(`ID-4:Change doors on the fourth image`, async ({ roomDoorViewerPage, door }) => {
+   doorPreviewFixture(`ID-4:Change doors on the fourth image`, async ({ roomDoorViewerPage, adminDoorManagerController,door }) => {
       await roomDoorViewerPage.open()
       await roomDoorViewerPage.clickRoomImage(4)
       await roomDoorViewerPage.clickDoor(door.anthrazite)
@@ -27,13 +27,13 @@ doorPreviewFixture.describe('DV-1/01: Door preview - Desctop', () => {
       await roomDoorViewerPage.clickDoor(door.beech)
       await roomDoorViewerPage.takeDoorViewerScreenshot('fourthRoomWithBeechDoor.png')
    });
-   doorPreviewFixture(`ID-5:Upload new image`, async ({ roomDoorViewerPage }) => {
+   doorPreviewFixture(`ID-5:Upload new image`, async ({ roomDoorViewerPage, adminDoorManagerController }) => {
       await roomDoorViewerPage.open()
       await roomDoorViewerPage.uploadNewphoto('docs/img', 'newDoor.jpg')
       await roomDoorViewerPage.clickSaveNewDoorPositionButton()
       await roomDoorViewerPage.takeDoorViewerScreenshot('newRoomWithOakDoor.png')
    });
-   doorPreviewFixture(`ID-6:Change doors on the new images`, async ({ roomDoorViewerPage, door }) => {
+   doorPreviewFixture(`ID-6:Change doors on the new images`, async ({ roomDoorViewerPage, door , adminDoorManagerController}) => {
       await roomDoorViewerPage.open()
       await roomDoorViewerPage.uploadNewphoto('docs/img', 'newDoor.jpg')
       await roomDoorViewerPage.clickSaveNewDoorPositionButton()
@@ -43,7 +43,7 @@ doorPreviewFixture.describe('DV-1/01: Door preview - Desctop', () => {
       await roomDoorViewerPage.clickDoor(door.creme)
       await roomDoorViewerPage.takeDoorViewerScreenshot('newRoomWithCremeDoor.png')
    });
-   doorPreviewFixture(`ID-7:Add door to the favourite using footer menu`, async ({ roomDoorViewerPage, door }) => {
+   doorPreviewFixture(`ID-7:Add door to the favourite using footer menu`, async ({ roomDoorViewerPage, door, adminDoorManagerController }) => {
       await roomDoorViewerPage.open()
       await roomDoorViewerPage.uploadNewphoto('docs/img', 'newDoor.jpg')
       await roomDoorViewerPage.clickSaveNewDoorPositionButton()
@@ -55,7 +55,7 @@ doorPreviewFixture.describe('DV-1/01: Door preview - Desctop', () => {
       await expect(roomDoorViewerPage.activeDoor(door.anthrazite)).toBeVisible()
       await expect(roomDoorViewerPage.doors).toHaveCount(1)
    });
-   doorPreviewFixture(`ID-8:Add two doors to the favourite using doors list`, async ({ roomDoorViewerPage, door }) => {
+   doorPreviewFixture(`ID-8:Add two doors to the favourite using doors list`, async ({ roomDoorViewerPage, door , adminDoorManagerController}) => {
       await roomDoorViewerPage.open()
       await roomDoorViewerPage.clickActiveDoorFavouriteMark(door.oak)
       await expect(roomDoorViewerPage.activeDoorMarkedAsFavourite(door.oak)).toBeVisible()
@@ -70,7 +70,7 @@ doorPreviewFixture.describe('DV-1/01: Door preview - Desctop', () => {
       await expect(roomDoorViewerPage.door(door.creme)).toBeVisible()
       await expect(roomDoorViewerPage.doors).toHaveCount(3)
    })
-   doorPreviewFixture(`ID-9:Refine the door position in the new images`, async ({ roomDoorViewerPage }) => {
+   doorPreviewFixture(`ID-9:Refine the door position in the new images`, async ({ roomDoorViewerPage, adminDoorManagerController }) => {
       await roomDoorViewerPage.open()
       await roomDoorViewerPage.uploadNewphoto('docs/img', 'newDoor.jpg')
       await roomDoorViewerPage.clickSaveNewDoorPositionButton()
@@ -79,7 +79,7 @@ doorPreviewFixture.describe('DV-1/01: Door preview - Desctop', () => {
       await roomDoorViewerPage.clickSaveNewDoorPositionButton()
       await roomDoorViewerPage.takeDoorViewerScreenshot('newDoorPosition.png')
    });
-   doorPreviewFixture(`ID-10:Save image`, async ({ roomDoorViewerPage, page }) => {
+   doorPreviewFixture(`ID-10:Save image`, async ({ roomDoorViewerPage, adminDoorManagerController }) => {
       await roomDoorViewerPage.open()
       await roomDoorViewerPage.uploadNewphoto('docs/img', 'newDoor.jpg')
       await roomDoorViewerPage.clickSaveNewDoorPositionButton()
@@ -88,7 +88,7 @@ doorPreviewFixture.describe('DV-1/01: Door preview - Desctop', () => {
       const referenceImagePath = path.resolve('docs/img/downloaded.oak.desktop.png');
       await roomDoorViewerPage.verifyDownloadedImage(downloadedImagePath, referenceImagePath); 
    });
-   doorPreviewFixture(`ID-11:Flip door`, async ({ roomDoorViewerPage }) => {
+   doorPreviewFixture(`ID-11:Flip door`, async ({ roomDoorViewerPage , adminDoorManagerController}) => {
       await roomDoorViewerPage.open()
       await roomDoorViewerPage.uploadNewphoto('docs/img', 'newDoor.jpg')
       await roomDoorViewerPage.clickSaveNewDoorPositionButton()
@@ -96,7 +96,7 @@ doorPreviewFixture.describe('DV-1/01: Door preview - Desctop', () => {
       await roomDoorViewerPage.clickFlipDoorButton()
       await roomDoorViewerPage.takeDoorViewerScreenshot('flippedNewRoomWithOakDoor.png')
    });
-   doorPreviewFixture('ID-12:Click share linkg', async ({ roomDoorViewerPage, page }) => {
+   doorPreviewFixture('ID-12:Click share linkg', async ({ roomDoorViewerPage, adminDoorManagerController }) => {
       await roomDoorViewerPage.open()
       await roomDoorViewerPage.uploadNewphoto('docs/img', 'newDoor.jpg')
       await roomDoorViewerPage.clickSaveNewDoorPositionButton()

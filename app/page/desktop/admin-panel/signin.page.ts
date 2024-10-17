@@ -10,6 +10,11 @@ export class SignIn extends AppPage {
     private passwordInput = this.page.locator('input#password')
 
     @step()
+    async open() {
+        await this.page.goto(this.pagePath)
+    }
+
+    @step()
     async expectLoaded() {
         await expect(this.signInButton).toBeVisible();
         await expect(this.emailInput).toBeVisible();

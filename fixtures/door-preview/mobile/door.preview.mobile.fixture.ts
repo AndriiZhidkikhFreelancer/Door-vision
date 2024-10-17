@@ -1,13 +1,13 @@
 import { test as base } from '@playwright/test';
-import { DoorManager } from '../../../api/index';
 import { RoomDoorMobileViewerPage, DoorPanelMobilePage, BurgerMenuMobilePage } from '../../../app/index';
+import { AdminDoorManagerController } from '../../../api/door-preview/admin.door.manger.controller'
 import { doors } from '../../../app/data/desktop/doors.data';
 
 // Declare the types of your fixtures.
 type MyFixtures = {
-  doorManager: DoorManager,
   roomDoorMobileViewerPage: RoomDoorMobileViewerPage,
   burgerMenuMobilePage: BurgerMenuMobilePage,
+  adminDoorManagerController:AdminDoorManagerController,
   doorPanelMobilePage: DoorPanelMobilePage,
   door: typeof doors
 };
@@ -15,16 +15,19 @@ type MyFixtures = {
 // Extend base test by providing "signIn" 
 // This new "test" can be used in multiple test files, and each of them will get the fixtures.
 export const doorPreviewMobileFixture = base.extend<MyFixtures>({
-  doorManager: async ({ page }, use) => {
-    const doorManager = new DoorManager(page.request)
-    const response = await doorManager.getUserScenarios();
-    const shortIds = response.data.getAppUser.getUserScenarios.map(scenario => scenario.shortId);
-    if (shortIds.length > 0) {
-      for (const id of shortIds) {
-         await doorManager.deleteUserScenarioForAppUser(id);
+  adminDoorManagerController: async ({ page }, use) => {
+    const adminDoorManagerController = new AdminDoorManagerController(page.request)
+    const response = await adminDoorManagerController.getVisualDoorsListPaginated();
+    const ids = response.data.getVisualDoorsPaginated.results
+         .filter((item: any) => item.name === 'Test Automation door')
+         .map((item: any) => item.id);
+
+    if (ids.length > 0) {
+      for (const id of ids) {
+         await adminDoorManagerController.deleteVisualDoor(id);
       }
    }
-    await use(doorManager)
+    await use(adminDoorManagerController)
   },
   roomDoorMobileViewerPage: async ({ page }, use) => {
     const roomDoorMobileViewerPage = new RoomDoorMobileViewerPage(page)

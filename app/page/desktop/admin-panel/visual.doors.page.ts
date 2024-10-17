@@ -6,11 +6,12 @@ export class VisualDoorsPage extends AppPage {
     public pagePath = 'https://admin.test.door-vision.cloud/visual-doors'
 
     private createNewDoorButton = this.page.locator('button i.fa-plus')
-    private visualDoorsTitle = this.page.locator('h3[_ngcontent-ppo-c105] ')
+    private visualDoorsTitle = this.page.locator('h3')
 
     @step()
     async expectLoaded() {
         await expect(this.visualDoorsTitle).toBeVisible();
+        await expect(this.visualDoorsTitle).toHaveText(' Visual doors');
         await expect(this.createNewDoorButton).toBeVisible();
     }
 
