@@ -35,20 +35,24 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
-    { name: 'setup', testMatch: /.*\.setup\.ts/ },
-    
+
     {
       name: 'Desktop-Chrome',
       use: { 
         ...devices['Desktop Chrome'],
         baseURL: 'https://testautomation.test.door-vision.cloud/?s=USER_IyuDiH',
-        launchOptions: {
-          args: [
-            '--enable-features=WebShare', 
-          ],
-        },
+        headless: true,
       },
       testDir: './tests/desktop',
+    },
+    {
+      name: 'Admin-Panel-Chrome',
+      use: { 
+        ...devices['Desktop Chrome'],
+        baseURL: 'https://admin.test.door-vision.cloud',
+        headless: true,
+      },
+      testDir: './tests/admin-panel',
     },
     {
       name: 'Mobile-Chrome',

@@ -10,11 +10,14 @@ type MyFixtures = {
   adminDoorManagerController:AdminDoorManagerController,
   doorPanelMobilePage: DoorPanelMobilePage,
   door: typeof doors
+  isHeaded: boolean
 };
 
 // Extend base test by providing "signIn" 
 // This new "test" can be used in multiple test files, and each of them will get the fixtures.
 export const doorPreviewMobileFixture = base.extend<MyFixtures>({
+  isHeaded: [false, { option: true }],
+  
   adminDoorManagerController: async ({ page }, use) => {
     const adminDoorManagerController = new AdminDoorManagerController(page.request)
     const response = await adminDoorManagerController.getVisualDoorsListPaginated();

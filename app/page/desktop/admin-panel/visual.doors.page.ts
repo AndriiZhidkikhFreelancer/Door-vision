@@ -3,7 +3,7 @@ import { AppPage } from "../../../abstractClasses";
 import { step } from "../../../../misc/reporters/step";
 
 export class VisualDoorsPage extends AppPage {
-    public pagePath = 'https://admin.test.door-vision.cloud/visual-doors'
+    public pagePath = '/visual-doors'
 
     private createNewDoorButton = this.page.locator('button i.fa-plus')
     private visualDoorsTitle = this.page.locator('h3')

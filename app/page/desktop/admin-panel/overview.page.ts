@@ -3,7 +3,7 @@ import { AppPage } from "../../../abstractClasses";
 import { step } from "../../../../misc/reporters/step";
 
 export class OverviewPage extends AppPage {
-    public pagePath = 'https://admin.test.door-vision.cloud/overview'
+    public pagePath = '/overview'
 
     private welcomeText = this.page.locator('div.col-md-12 p')
     private visualDoorsTab = this.page.locator('a[routerlink="./visual-doors"]')

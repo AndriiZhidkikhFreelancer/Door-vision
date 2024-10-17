@@ -10,7 +10,9 @@
     "desk-update-screens":"npx playwright test --project=Desktop-Chrome --update-snapshots",
     "mob-ui":"npx playwright test --project=Mobile-Chrome --headed",
     "mob":"npx playwright test --project=Mobile-Chrome --headed",
-    "mob-update-screens":"npx playwright test --project=Mobile-Chrome --update-snapshots"
+    "mob-update-screens":"npx playwright test --project=Admin-Panel-Chrome --update-snapshots",
+    "admin-ui":"npx playwright test --project=Admin-Panel-Chrome --headed",
+    "admin":"npx playwright test --project=Admin-Panel-Chrome --headed"
   },
   "keywords": [],
   "author": "",

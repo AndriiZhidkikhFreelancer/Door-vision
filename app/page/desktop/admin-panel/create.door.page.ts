@@ -4,7 +4,7 @@ import { expect } from "@playwright/test";
 const path = require('path');
 
 export class CreateDoorPage extends AppPage {
-    public pagePath = 'https://admin.test.door-vision.cloud/visual-doors/new'
+    public pagePath = '/visual-doors/new'
     public doorNameField = this.page.locator('input#name')
     public title = this.page.locator('h3')
     private externalIdsField = this.page.locator('input#externalIds')

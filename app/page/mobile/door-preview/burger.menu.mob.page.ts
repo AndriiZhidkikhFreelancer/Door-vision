@@ -52,8 +52,10 @@ export class BurgerMenuMobilePage extends AppPage {
     }
     @step()
     async saveDownloadedImage() {
+        await this.page.waitForLoadState('networkidle')
         const downloadPromise = this.page.waitForEvent('download');
         await this.clickSaveImgButton();
+        await this.page.waitForLoadState('networkidle')
         const download = await downloadPromise;
         const downloadPath = path.join(__dirname, './downloads', download.suggestedFilename()!);
         await download.saveAs(downloadPath);

@@ -3,7 +3,7 @@ import { AppPage } from "../../../abstractClasses";
 import { step } from "../../../../misc/reporters/step";
 
 export class SignIn extends AppPage {
-    public pagePath = 'https://admin.test.door-vision.cloud'
+    public pagePath = '/'
 
     private signInButton = this.page.locator('button[type="submit"]')
     public emailInput = this.page.locator('input#email')

@@ -197,7 +197,7 @@ doorPreviewMobileFixture.describe('DV-1/01: Door preview - Mobile', () => {
       await expect(roomDoorMobileViewerPage.doorName).toBeVisible()
       await expect(burgerMenuMobilePage.roomsImageSection).toHaveCount(0)
    });
-   doorPreviewMobileFixture('ID-M12:Save image', async ({ roomDoorMobileViewerPage, burgerMenuMobilePage, adminDoorManagerController,door }) => {
+   doorPreviewMobileFixture.only('ID-M12:Save image', async ({ roomDoorMobileViewerPage, burgerMenuMobilePage, adminDoorManagerController,door }) => {
       await roomDoorMobileViewerPage.open()
       await expect(roomDoorMobileViewerPage.doorName).toHaveText(door.oak)
       await expect(roomDoorMobileViewerPage.doorName).toBeVisible()
@@ -227,21 +227,6 @@ doorPreviewMobileFixture.describe('DV-1/01: Door preview - Mobile', () => {
       await expect(burgerMenuMobilePage.roomsImageSection).toHaveCount(0)
       await roomDoorMobileViewerPage.takeDoorViewerScreenshot('flippedNewRoomWithOakDoor.png')
    });
-   doorPreviewMobileFixture.skip('ID-M14:Click share link', async ({roomDoorMobileViewerPage,burgerMenuMobilePage, adminDoorManagerController,door }) => {
-      await roomDoorMobileViewerPage.open()
-      await expect(roomDoorMobileViewerPage.doorName).toHaveText(door.oak)
-      await expect(roomDoorMobileViewerPage.doorName).toBeVisible()
-      await roomDoorMobileViewerPage.clickUploadPhotoButton()
-      await roomDoorMobileViewerPage.uploadNewphoto('docs/img', 'newDoor.jpg')
-      await roomDoorMobileViewerPage.clickSaveNewDoorPositionButton()
-      await expect(roomDoorMobileViewerPage.doorName).toHaveText(door.oak)
-      await expect(roomDoorMobileViewerPage.doorName).toBeVisible()
-      await roomDoorMobileViewerPage.clickMenuButton()
-      await burgerMenuMobilePage.expectLoaded() 
-      await burgerMenuMobilePage.mockShareDialog()
-      await burgerMenuMobilePage.clickShareLinkButton()
-      await burgerMenuMobilePage.waitForShareDialog()
-   });
    doorPreviewMobileFixture('ID-M15:Click go to shop button', async ({ roomDoorMobileViewerPage, context, adminDoorManagerController,door }) => {
       await roomDoorMobileViewerPage.open()
       await roomDoorMobileViewerPage.clickUploadPhotoButton()
@@ -259,6 +244,21 @@ doorPreviewMobileFixture.describe('DV-1/01: Door preview - Mobile', () => {
       await expect(productDetailPage.pageTitle).toHaveText('Hey, ')
       await expect(productDetailPage.pageTitle).toBeVisible()
       expect(newPage).toHaveURL('https://www.door-vision.com/productdetail')
-   }); 
+   });
+   doorPreviewMobileFixture.skip('ID-M14:Click share link', async ({roomDoorMobileViewerPage,burgerMenuMobilePage, adminDoorManagerController,door }) => {
+      await roomDoorMobileViewerPage.open()
+      await expect(roomDoorMobileViewerPage.doorName).toHaveText(door.oak)
+      await expect(roomDoorMobileViewerPage.doorName).toBeVisible()
+      await roomDoorMobileViewerPage.clickUploadPhotoButton()
+      await roomDoorMobileViewerPage.uploadNewphoto('docs/img', 'newDoor.jpg')
+      await roomDoorMobileViewerPage.clickSaveNewDoorPositionButton()
+      await expect(roomDoorMobileViewerPage.doorName).toHaveText(door.oak)
+      await expect(roomDoorMobileViewerPage.doorName).toBeVisible()
+      await roomDoorMobileViewerPage.clickMenuButton()
+      await burgerMenuMobilePage.expectLoaded() 
+      await burgerMenuMobilePage.mockShareDialog()
+      await burgerMenuMobilePage.clickShareLinkButton()
+      await burgerMenuMobilePage.waitForShareDialog()
+   });
    
 })
