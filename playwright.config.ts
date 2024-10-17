@@ -34,13 +34,14 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
+    { name: 'setup', testMatch: /.*\.setup\.ts/ },
     {
       name: 'Desktop-Chrome',
       use: { 
         ...devices['Desktop Chrome'],
         baseURL: 'https://testautomation.test.door-vision.cloud/?s=USER_IyuDiH',
       },
-
+      dependencies: ['setup'],
       testDir: './tests/desktop',
     },
     {

@@ -5,10 +5,11 @@
   "scripts": {
     "test":"npx playwright test",
     "update-screens":"npx playwright test --update-snapshots",
-    "desk-ui":"npx playwright test --project=Desktop-Chrome --headed",
+    "desk-ui":"npx playwright test --project=Desktop-Chrome",
     "desk-update-screens":"npx playwright test --project=Desktop-Chrome --update-snapshots",
     "mob-ui":"npx playwright test --project=Mobile-Chrome --headed",
-    "mob-update-screens":"npx playwright test --project=Mobile-Chrome --update-snapshots"
+    "mob-update-screens":"npx playwright test --project=Mobile-Chrome --update-snapshots",
+    "admin-ui":"npx playwright test  admin.page.spec.ts --headed"
   },
   "keywords": [],
   "author": "",

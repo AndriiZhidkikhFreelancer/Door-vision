@@ -6,3 +6,4 @@ node_modules/
 *xlsx
 app/page/desktop/door-preview/downloads/
 app/page/mobile/door-preview/downloads/
+playwright/.auth

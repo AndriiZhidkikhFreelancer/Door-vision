@@ -83,6 +83,7 @@ doorPreviewFixture.describe('DV-1/01: Door preview - Desctop', () => {
       await roomDoorViewerPage.open()
       await roomDoorViewerPage.uploadNewphoto('docs/img', 'newDoor.jpg')
       await roomDoorViewerPage.clickSaveNewDoorPositionButton()
+      await roomDoorViewerPage.takeDoorViewerScreenshot('newRoomWithOakDoor.png')
       const downloadedImagePath = await roomDoorViewerPage.saveDownloadedImage();
       const referenceImagePath = path.resolve('docs/img/downloaded.oak.desktop.png');
       await roomDoorViewerPage.verifyDownloadedImage(downloadedImagePath, referenceImagePath); 

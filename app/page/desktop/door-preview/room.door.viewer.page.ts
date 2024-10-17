@@ -153,6 +153,9 @@ export class RoomDoorViewerPage extends AppPage {
     }
     @step()
     async verifyDownloadedImage(downloadPath: string, referenceImagePath: string){
+        console.log('Размеры изображений:');
+        console.log(`Загруженное изображение: ${downloadPath.length} байт`);
+        console.log(`Эталонное изображение: ${referenceImagePath.length} байт`);
         const referenceImageBuffer = fs.readFileSync(referenceImagePath); 
         const downloadedImageBuffer = fs.readFileSync(downloadPath); 
         // Compare images
