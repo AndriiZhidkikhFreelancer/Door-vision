@@ -197,7 +197,7 @@ doorPreviewMobileFixture.describe('DV-1/01: Door preview - Mobile', () => {
       await expect(roomDoorMobileViewerPage.doorName).toBeVisible()
       await expect(burgerMenuMobilePage.roomsImageSection).toHaveCount(0)
    });
-   doorPreviewMobileFixture.only('ID-M12:Save image', async ({ roomDoorMobileViewerPage, burgerMenuMobilePage, adminDoorManagerController,door }) => {
+   doorPreviewMobileFixture('ID-M12:Save image', async ({ roomDoorMobileViewerPage, burgerMenuMobilePage, adminDoorManagerController,door }) => {
       await roomDoorMobileViewerPage.open()
       await expect(roomDoorMobileViewerPage.doorName).toHaveText(door.oak)
       await expect(roomDoorMobileViewerPage.doorName).toBeVisible()
