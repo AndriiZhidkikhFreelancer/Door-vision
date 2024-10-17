@@ -37,6 +37,11 @@ jobs:
         name: playwright-report
         path: playwright-report/
         retention-days: 30
+    - name: Upload image as artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-image
+        path: app\page\mobile\door-preview\downloads\   
 
   deploy:
     if: always()
