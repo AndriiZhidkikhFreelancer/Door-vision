@@ -12,7 +12,7 @@ type MyFixtures = {
   roomDoorViewerPage: RoomDoorViewerPage,
   signIn:SignIn,
   user: typeof user,
-  adminDoor: typeof newDoor
+  newAdminDoor: typeof newDoor
 };
 
 // Extend base test by providing "signIn" 
@@ -53,9 +53,9 @@ export const adminFixture = base.extend<MyFixtures>({
     const visualDoorsPage = new VisualDoorsPage(page)
     await use(visualDoorsPage)
   },
-  adminDoor: async ({}, use) => {
-    const adminDoor = newDoor
-    await use(adminDoor)
+  newAdminDoor: async ({}, use) => {
+    const newAdminDoor = newDoor
+    await use(newAdminDoor)
   },
   roomDoorViewerPage: async ({ page }, use) => {
     const housDoorViewerPage = new RoomDoorViewerPage(page)

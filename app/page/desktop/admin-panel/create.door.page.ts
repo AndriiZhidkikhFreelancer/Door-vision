@@ -5,16 +5,16 @@ const path = require('path');
 
 export class CreateDoorPage extends AppPage {
     public pagePath = 'https://admin.test.door-vision.cloud/visual-doors/new'
-    private doorNameField = this.page.locator('input#name')
+    public doorNameField = this.page.locator('input#name')
     private externalIdsField = this.page.locator('input#externalIds')
     private shopLinkField = this.page.locator('input#showNowLink')
     private priceField = this.page.locator('input#priceValue')
     private priceCurrencySelect= this.page.locator('select[name="priceCurrency"]')
     private uploadImageField = this.page.locator('input#inputGroupFile01')
     private saveButton = this.page.locator('button[type="submit"]')
-    public successMessage = this.page.locator('div[aria-label="Saved successfully"]')
+    public alertMessage = this.page.locator('div[role="alert"]')
     public newDoorImg = this.page.locator('app-show-visual-door div img')
-
+    private deleteDoorButton = this.page.locator('//button[text()="Delete "]')
 
     @step()
     async setDoorNameField(text:string) {
@@ -43,6 +43,13 @@ export class CreateDoorPage extends AppPage {
     @step()
     async clickSaveButton() {
         await this.saveButton.click()
+    }
+    @step()
+    async clickDeleteDoorButtonn() {
+        this.page.on('dialog', async dialog => {
+            await dialog.accept();
+          });
+        await this.deleteDoorButton.click()
     }
     @step()
     async pingNewDoorImg() {

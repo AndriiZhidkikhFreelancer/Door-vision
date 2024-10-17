@@ -5,7 +5,7 @@ import { step } from "../../../../misc/reporters/step";
 export class DoorPanelMobilePage extends AppPage {
     public pagePath = '/';
     public doors = this.page.locator('div.door img')
-    public door(number: number) { return this.page.locator(`(//div[@class="door"])[${number}]`) }
+    public door(number: number) { return this.page.locator(`(//div[@class="door"]//img)[${number}]`) }
     public activeDoor = this.page.locator('div.door.active')
     private favouriteButton = this.page.locator('div.door-buttons i')
     private favouriteMarkForDoor (number: number) { return this.page.locator(`(//div[@class="door"])[${number}]//div[@class="fav-container"]`) }

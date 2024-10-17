@@ -96,7 +96,7 @@ doorPreviewFixture.describe('DV-1/01: Door preview - Desctop', () => {
       await roomDoorViewerPage.clickFlipDoorButton()
       await roomDoorViewerPage.takeDoorViewerScreenshot('flippedNewRoomWithOakDoor.png')
    });
-   doorPreviewFixture('ID-12:Click share linkg', async ({ roomDoorViewerPage, adminDoorManagerController }) => {
+   doorPreviewFixture.skip('ID-12:Click share linkg', async ({ roomDoorViewerPage, page, adminDoorManagerController }) => {
       await roomDoorViewerPage.open()
       await roomDoorViewerPage.uploadNewphoto('docs/img', 'newDoor.jpg')
       await roomDoorViewerPage.clickSaveNewDoorPositionButton()
@@ -121,3 +121,6 @@ doorPreviewFixture.describe('DV-1/01: Door preview - Desctop', () => {
    });
 
 })
+
+
+

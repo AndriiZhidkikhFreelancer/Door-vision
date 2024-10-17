@@ -41,6 +41,11 @@ export default defineConfig({
       use: { 
         ...devices['Desktop Chrome'],
         baseURL: 'https://testautomation.test.door-vision.cloud/?s=USER_IyuDiH',
+        launchOptions: {
+          args: [
+            '--enable-features=WebShare', 
+          ],
+        },
       },
       testDir: './tests/desktop',
     },

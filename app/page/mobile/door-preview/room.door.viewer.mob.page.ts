@@ -64,11 +64,13 @@ export class RoomDoorMobileViewerPage extends AppPage {
     }
     @step()
     async clickNextDoorArrow(){
+        await this.page.waitForTimeout(1000)
         await this.nextDoorArrow.click()
         await this.page.waitForLoadState('networkidle')
     }
     @step()
     async clickPreviousDoorArrow(){
+        await this.page.waitForTimeout(1000)
         await this.previousDoorArrow.click()
         await this.page.waitForLoadState('networkidle')
     }

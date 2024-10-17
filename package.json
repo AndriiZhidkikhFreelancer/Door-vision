@@ -7,7 +7,7 @@
     "update-screens":"npx playwright test --update-snapshots",
     "desk-ui":"npx playwright test --project=Desktop-Chrome --headed",
     "desk-update-screens":"npx playwright test --project=Desktop-Chrome --update-snapshots",
-    "mob-ui":"npx playwright test --project=Mobile-Chrome --headed",
+    "mob-ui":"npx playwright test --project=Mobile-Chrome",
     "mob-update-screens":"npx playwright test --project=Mobile-Chrome --update-snapshots"
   },
   "keywords": [],

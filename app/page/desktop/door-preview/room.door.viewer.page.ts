@@ -15,7 +15,7 @@ export class RoomDoorViewerPage extends AppPage {
     public favouriteToggleText = this.page.locator('span.toggle-text-off')
 
     public goToShopButton = this.page.locator('button[title="Find Out More"]')
-    private shareLinkButton = this.page.locator('button[title="Share Link"]')
+    private shareLinkButton = this.page.locator('button[title="Share Link"] i')
     private saveImgButton = this.page.locator('button[title="Save Image"]')
     private flipDoorButton = this.page.locator('button[title="Flip Door"]')
     private markFavouriteButton = this.page.locator('button[title="Mark Favourite"]')
@@ -124,19 +124,24 @@ export class RoomDoorViewerPage extends AppPage {
                 x: position.x + offset,
                 y: position.y,
             };
+            await this.page.waitForTimeout(500);
             await this.page.mouse.move(position.x, position.y);
+            await this.page.waitForTimeout(500);
             await this.page.mouse.down();
+            await this.page.waitForTimeout(500);
             await this.page.mouse.move(newPosition.x, newPosition.y);
+            await this.page.waitForTimeout(500);
             await this.page.mouse.up();
         }
     }
     @step()
-    async mockShareDialog(): Promise<void> {
-        await this.page.evaluate(() => {
+    async mockShareDialog(){
+          await this.page.evaluate(() => {
             (window as any).waitForShareDialog = new Promise(resolve => {
                 (navigator as any).share = resolve; 
             });
-        });
+        });  
+      
     }
     @step()
     async waitForShareDialog() {
@@ -153,9 +158,6 @@ export class RoomDoorViewerPage extends AppPage {
     }
     @step()
     async verifyDownloadedImage(downloadPath: string, referenceImagePath: string){
-        console.log('Размеры изображений:');
-        console.log(`Загруженное изображение: ${downloadPath.length} байт`);
-        console.log(`Эталонное изображение: ${referenceImagePath.length} байт`);
         const referenceImageBuffer = fs.readFileSync(referenceImagePath); 
         const downloadedImageBuffer = fs.readFileSync(downloadPath); 
         // Compare images

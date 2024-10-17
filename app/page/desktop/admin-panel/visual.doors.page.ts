@@ -7,6 +7,7 @@ export class VisualDoorsPage extends AppPage {
 
     private createNewDoorButton = this.page.locator('button i.fa-plus')
     private visualDoorsTitle = this.page.locator('h3')
+    public externalIds(roomIds: string) { return this.page.locator(`//td[text()="${roomIds}"]`) }
 
     @step()
     async expectLoaded() {
@@ -18,6 +19,10 @@ export class VisualDoorsPage extends AppPage {
     @step()
     async clickCreateNewDoorButton() {
         await this.createNewDoorButton.click()
+    }
+    @step()
+    async clickExternalIds(text:string) {
+        await this.externalIds(text).click()
     }
  
 }
